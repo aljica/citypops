@@ -7,10 +7,22 @@ import CountrySearchResults from '../CountrySearchResults';
 class CountrySearch extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      inputValue: '',
+    };
   }
 
   redirect(path) {
-    this.props.history.push(path);
+    this.props.history.push({
+      pathname: path,
+      search: this.state.inputValue,
+    });
+  }
+
+  updateInputValue(e) {
+    this.setState({
+      inputValue: e.target.value,
+    });
   }
 
   render() {
@@ -24,7 +36,7 @@ class CountrySearch extends Component {
           </Grid>
           <br></br>
           <Grid container justify="center">
-            <Input fullWidth placeholder="Enter a country" inputProps={{style: { textAlign: 'center' }}}></Input>
+            <Input value={this.state.inputValue} onChange={(e) => this.updateInputValue(e)} fullWidth placeholder="Enter a country" inputProps={{style: { textAlign: 'center' }}} />
           </Grid>
           <Grid container justify="center">
             <Button onClick={() => this.redirect('/country/results')}>
