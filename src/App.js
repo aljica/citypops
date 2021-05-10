@@ -3,6 +3,7 @@ import InitialSearchScreen from './routes/initialSearchView/InitialSearchScreen'
 import { Typography } from '@material-ui/core';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import CountrySearch from './routes/initialSearchView/CountrySearch';
+import CountrySearchResults from './routes/CountrySearchResults';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <br></br>
       <Route path="/" exact component={InitialSearchScreen} />
       <Route path="/country" exact component={CountrySearch} />
+      <Route path="/country/results" exact component={CountrySearchResults} />
     </Router>
   );
 }
