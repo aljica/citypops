@@ -12,8 +12,9 @@ class CountrySearch extends Component {
               SEARCH BY COUNTRY
             </Typography>
           </Grid>
+          <br></br>
           <Grid container justify="center">
-            <Input></Input>
+            <Input placeholder="Enter a country" inputProps={{style: { textAlign: 'center '}}}></Input>
           </Grid>
         </Container>
       </div>
