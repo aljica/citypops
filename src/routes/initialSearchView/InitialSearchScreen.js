@@ -11,7 +11,7 @@ class InitialSearchScreen extends Component {
     console.log('mounted');
   }
 
-  nextPath(path) {
+  redirect(path) {
     this.props.history.push(path);
   }
 
@@ -24,7 +24,7 @@ class InitialSearchScreen extends Component {
               <Button size="large" variant="contained">SEARCH BY CITY</Button>
             </Grid>
             <Grid item xs={6} align="center">
-              <Button onClick={() => this.nextPath('/country')} size="large" variant="contained">SEARCH BY COUNTRY</Button>
+              <Button onClick={() => this.redirect('/country')} size="large" variant="contained">SEARCH BY COUNTRY</Button>
             </Grid>
           </Grid>
         </Container>

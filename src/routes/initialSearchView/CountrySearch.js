@@ -1,6 +1,6 @@
-import React from 'react';
+import { Component } from 'react';
 
-class CountrySearch extends React.Component {
+class CountrySearch extends Component {
   render() {
     return (
       <div>
