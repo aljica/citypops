@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { Grid, Button, Container } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
 
 class InitialSearchScreen extends Component {
   constructor(props) {
