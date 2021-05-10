@@ -12,6 +12,7 @@ function App() {
           CityPop
         </Typography>
       </div>
+      <br></br>
       <Route path="/" exact component={InitialSearchScreen} />
       <Route path="/country" exact component={CountrySearch} />
     </Router>
