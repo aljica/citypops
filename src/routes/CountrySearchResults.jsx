@@ -1,45 +1,38 @@
-import { Component, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-class CountrySearchResults extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-      url: null,
-      data: null,
-    };
+const CountrySearchResults = (props) => {
+  const [loading, setLoading] = useState(true);
+  const [results, setResults] = useState(null);
 
-    // Create URL.
-    const maxRows = 3;
-    const username = 'weknowit';
-    const URL = 'http://api.geonames.org/searchJSON?q=' + this.props.location.search.replace('?', '') + `&maxRows=${maxRows}&orderby=population&username=${username}`;
-    this.url = URL;
-  }
+  // Create URL.
+  console.log(props.location.search);
+  const maxRows = 3;
+  const username = 'weknowit';
+  const URL = 'http://api.geonames.org/searchJSON?q=' + props.location.search.replace('?', '') + `&maxRows=${maxRows}&orderby=population&username=${username}`;
+  const [url, setURL] = useState(URL);
 
-  parseData(data) {
+  function parseData(data) {
     console.log(data);
-    this.setState({ loading: false });
+    setLoading(false);
   }
 
-  getCities(URL) {
+  function getCities(URL) {
     console.log(URL);
     fetch(URL)
       .then((response) => response.json())
-      .then((data) => this.parseData(data))
+      .then((data) => parseData(data))
       .catch((e) => console.log(e));
   }
 
-  componentDidMount() {
-    this.getCities(this.url);
-  }
+  useEffect(() => {
+    getCities(url);
+  });
 
-  render() {
-    return (
-      <div>
-        {this.state.loading ? 'Loading' : 'Done'}
-      </div>
-    );
-  }
+  return (
+    <div>
+      {loading ? 'Loading' : 'Done'}
+    </div>
+  );
 }
 
 export default CountrySearchResults;
