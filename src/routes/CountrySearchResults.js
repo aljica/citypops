@@ -18,6 +18,7 @@ class CountrySearchResults extends Component {
 
   parseData(data) {
     console.log(data);
+    this.setState({ loading: false });
   }
 
   getCities(URL) {
