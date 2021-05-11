@@ -7,11 +7,21 @@ const CountrySearchResults = (props) => {
   // Create URL.
   const maxRows = 3;
   const username = 'weknowit';
-  const URL = 'http://api.geonames.org/searchJSON?q=' + props.location.search.replace('?', '') + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
+  const soughtCountry = props.location.search.replace('?', '');
+  // City (featureClass P) Search below:
+  // const URL = 'http://api.geonames.org/searchJSON?name=' + props.location.search.replace('?', '') + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
+  const URL = 'http://api.geonames.org/searchJSON?q=' + soughtCountry + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
   const [url, setURL] = useState(URL);
 
   function parseData(data) {
-    console.log(data);
+    const cityData = data.geonames.map((city) => {
+      const objectData = {};
+      objectData['toponymName'] = city.toponymName;
+      objectData['population'] = city.population;
+      return objectData;
+    });
+    setResults(cityData);
+    console.log(cityData);
     setLoading(false);
   }
 
@@ -29,7 +39,9 @@ const CountrySearchResults = (props) => {
 
   return (
     <div>
-      {loading ? 'Loading' : 'Done'}
+      {loading ? 'Loading' : 
+        <div>{results[0].toponymName + ' and ' + results[0].population}</div>
+      }
     </div>
   );
 }
