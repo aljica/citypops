@@ -5,7 +5,6 @@ const CountrySearchResults = (props) => {
   const [results, setResults] = useState(null);
 
   // Create URL.
-  console.log(props.location.search);
   const maxRows = 3;
   const username = 'weknowit';
   const URL = 'http://api.geonames.org/searchJSON?q=' + props.location.search.replace('?', '') + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
