@@ -3,13 +3,16 @@ import { Component } from 'react';
 class CountrySearchResults extends Component {
   constructor(props) {
     super(props);
-    const maxRows = 3;
-    const username = 'weknowit';
-    const URL = 'http://api.geonames.org/searchJSON?q=' + this.props.location.search.replace('?', '') + `&maxRows=${maxRows}&orderby=population&username=${username}`;
     this.state = {
       loading: true,
       url: null,
+      data: null,
     };
+
+    // Create URL.
+    const maxRows = 3;
+    const username = 'weknowit';
+    const URL = 'http://api.geonames.org/searchJSON?q=' + this.props.location.search.replace('?', '') + `&maxRows=${maxRows}&orderby=population&username=${username}`;
     this.url = URL;
   }
 
@@ -25,11 +28,14 @@ class CountrySearchResults extends Component {
       .catch((e) => console.log(e));
   }
 
+  componentDidMount() {
+    this.getCities(this.url);
+  }
+
   render() {
     return (
       <div>
-        Hello World
-        {this.getCities(this.url)}
+        {this.state.loading ? 'Loading' : 'Done'}
       </div>
     );
   }
