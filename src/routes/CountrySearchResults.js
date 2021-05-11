@@ -3,8 +3,9 @@ import { Component } from 'react';
 class CountrySearchResults extends Component {
   constructor(props) {
     super(props);
-    // const URL = 'api.geonames.org/search?q=' + this.props.location.search;
-    const URL = 'http://api.geonames.org/searchJSON?q=' + this.props.location.search.replace('?', '') + '&maxRows=3&orderby=population&username=weknowit';
+    const maxRows = 3;
+    const username = 'weknowit';
+    const URL = 'http://api.geonames.org/searchJSON?q=' + this.props.location.search.replace('?', '') + `&maxRows=${maxRows}&orderby=population&username=${username}`;
     this.state = {
       loading: true,
       url: null,
