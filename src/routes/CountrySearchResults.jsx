@@ -8,7 +8,7 @@ const CountrySearchResults = (props) => {
   console.log(props.location.search);
   const maxRows = 3;
   const username = 'weknowit';
-  const URL = 'http://api.geonames.org/searchJSON?q=' + props.location.search.replace('?', '') + `&maxRows=${maxRows}&orderby=population&username=${username}`;
+  const URL = 'http://api.geonames.org/searchJSON?q=' + props.location.search.replace('?', '') + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
   const [url, setURL] = useState(URL);
 
   function parseData(data) {
@@ -26,7 +26,7 @@ const CountrySearchResults = (props) => {
 
   useEffect(() => {
     getCities(url);
-  });
+  }, [url]);
 
   return (
     <div>
