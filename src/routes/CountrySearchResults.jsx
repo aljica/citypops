@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, useEffect } from 'react';
 
 class CountrySearchResults extends Component {
   constructor(props) {
