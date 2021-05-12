@@ -64,7 +64,7 @@ const CountrySearchResults = (props) => {
             results.map((city) => {
               return(
                 <Grid item xs={12} align="center">
-                <Button onClick={() => redirect('/city/results', city.toponymName, city.population)} size="large" variant="contained">{city.toponymName}</Button>
+                <Button style={{width: '300px', height: '30px'}} onClick={() => redirect('/city/results', city.toponymName, city.population)} size="large" variant="contained">{city.toponymName}</Button>
                 </Grid>
               )
             })}
