@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Grid, Button, Container, Typography } from '@material-ui/core';
 
-const CountrySearchResults = (props) => {
+const CitySearchResult = (props) => {
   const [loading, setLoading] = useState(true);
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState(null);
 
   // Create URL.
   const maxRows = 3;
   const username = 'weknowit';
-  const soughtCountry = props.location.search.replace('?', '');
+  const soughtCity = props.location.search.replace('?', '');
   // City (featureClass P) Search below:
-  // const URL = 'http://api.geonames.org/searchJSON?name=' + props.location.search.replace('?', '') + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
-  const URL = 'http://api.geonames.org/searchJSON?q=' + soughtCountry + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
+  const URL = 'http://api.geonames.org/searchJSON?name=' + soughtCity + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
   const [url, setURL] = useState(URL);
 
   function parseData(data) {
@@ -51,18 +50,13 @@ const CountrySearchResults = (props) => {
             <Grid item xs={12} align="center">
               <img alt='Loading' src={require('../static/images/magnifying-glass.png')}></img>
             </Grid> :
-            results.map((city) => {
-              return(
-                <Grid item xs={12} align="center">
-                <Button size="large" variant="contained">{city.toponymName}</Button>
-                </Grid>
-              )
-            })}
-            {results.length ? console.log(results.length) :
-            <Grid item xs={12} align="center">
-              Empty
-            </Grid>
-            }
+              results.map((city) => {
+                return(
+                  <Grid item xs={12} align="center">
+                  <Button size="large" variant="contained">{city.toponymName}</Button>
+                  </Grid>
+                )
+              })}
         </Grid>
       </Container>
     </div>
