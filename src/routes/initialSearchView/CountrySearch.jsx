@@ -36,7 +36,7 @@ class CountrySearch extends Component {
           </Grid>
           <br></br>
           <Grid container justify="center">
-            <Input value={this.state.inputValue} onChange={(e) => this.updateInputValue(e)} fullWidth placeholder="Enter a country" inputProps={{style: { textAlign: 'center' }}} />
+            <Input value={this.state.inputValue} onChange={(e) => this.updateInputValue(e)} fullWidth placeholder="Enter a country" inputProps={{style: { textAlign: "center" }}} />
           </Grid>
           <Grid container justify="center">
             <Button onClick={() => this.redirect('/country/results')}>
