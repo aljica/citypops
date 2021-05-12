@@ -18,6 +18,7 @@ function App() {
       <Route path="/" exact component={InitialSearchScreen} />
       <Route path="/country" exact component={CountrySearch} />
       <Route path="/country/results" exact component={CountrySearchResults} />
+      <Route path ="/city" exact Component={CitySearch} />
       <Route path="/city/results" exact component={CitySearchResult} />
     </Router>
   );
