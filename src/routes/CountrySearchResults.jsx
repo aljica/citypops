@@ -3,7 +3,7 @@ import { Grid, Button, Container, Typography } from '@material-ui/core';
 
 const CountrySearchResults = (props) => {
   const [loading, setLoading] = useState(true);
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState(null);
 
   // Create URL.
   const maxRows = 3;
@@ -22,7 +22,6 @@ const CountrySearchResults = (props) => {
       return objectData;
     });
     setResults(cityData);
-    console.log(cityData);
     setLoading(false);
   }
 
@@ -66,11 +65,6 @@ const CountrySearchResults = (props) => {
                 </Grid>
               )
             })}
-            {results.length ? console.log(results.length) :
-            <Grid item xs={12} align="center">
-              Empty
-            </Grid>
-            }
         </Grid>
       </Container>
     </div>

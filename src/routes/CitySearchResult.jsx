@@ -17,8 +17,19 @@ const CitySearchResult = (props) => {
           <Typography variant="h5">
             {name}
           </Typography>
+          <br></br>
+          <br></br>
           <Grid item xs={12} align="center">
-            <Box>{population}</Box>
+            <Box border={1} width="25%" borderRadius="borderRadius">
+              <Typography variant="h8">
+                POPULATION
+              </Typography>
+              <br></br>
+              <br></br>
+              <Typography variant="h4">
+                {population}
+              </Typography>
+            </Box>
           </Grid>
         </Grid>
       </Container>
