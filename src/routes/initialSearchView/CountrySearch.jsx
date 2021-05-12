@@ -1,8 +1,6 @@
-import { Typography } from '@material-ui/core';
-import { Grid, Button, Input, Container } from '@material-ui/core';
+import { Typography, Grid, Button, Input, Container } from '@material-ui/core';
 import { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import CountrySearchResults from '../CountrySearchResults';
+import magnifyingGlass from '../../static/images/magnifying-glass.png';
 
 class CountrySearch extends Component {
   constructor(props) {
@@ -40,7 +38,7 @@ class CountrySearch extends Component {
           </Grid>
           <Grid container justify="center">
             <Button onClick={() => this.redirect('/country/results')}>
-                Search
+                <img src={magnifyingGlass} alt="Search" width="50" height="50"></img>
               </Button>
           </Grid>
         </Container>

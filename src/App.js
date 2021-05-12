@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import CountrySearch from './routes/initialSearchView/CountrySearch';
 import CountrySearchResults from './routes/CountrySearchResults';
 import CitySearchResult from './routes/CitySearchResult';
+import CitySearch from './routes/CitySearch';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/" exact component={InitialSearchScreen} />
       <Route path="/country" exact component={CountrySearch} />
       <Route path="/country/results" exact component={CountrySearchResults} />
+      <Route path="/city" exact component={CitySearch} />
       <Route path="/city/results" exact component={CitySearchResult} />
     </Router>
   );
