@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Grid, Button, Container, Typography } from '@material-ui/core';
 
 const CountrySearchResults = (props) => {
   const [loading, setLoading] = useState(true);
@@ -39,9 +40,23 @@ const CountrySearchResults = (props) => {
 
   return (
     <div>
-      {loading ? 'Loading' : 
-        <div>{results[0].toponymName + ' and ' + results[0].population}</div>
-      }
+      <Container maxwidth="sm">
+        <Grid container spacing={1} justify="center">
+          <Typography variant="h6">
+            {soughtCountry.toUpperCase()}
+          </Typography>
+          <br></br>
+          <br></br>
+            {loading ? 'Loading' :
+              results.map((city) => {
+                return(
+                  <Grid item xs={12} align="center">
+                  <Button size="large" variant="contained">{city.toponymName}</Button>
+                  </Grid>
+                )
+              })}
+        </Grid>
+      </Container>
     </div>
   );
 }
