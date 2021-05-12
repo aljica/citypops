@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import CountrySearch from './routes/initialSearchView/CountrySearch';
 import CountrySearchResults from './routes/CountrySearchResults';
 import CitySearchResult from './routes/CitySearchResult';
+import CitySearch from './routes/CitySearch';
 
 function App() {
   return (
