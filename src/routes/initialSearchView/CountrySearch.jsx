@@ -37,7 +37,7 @@ class CountrySearch extends Component {
             <Input value={this.state.inputValue} onChange={(e) => this.updateInputValue(e)} fullWidth placeholder="Enter a country" inputProps={{style: { textAlign: "center" }}} />
           </Grid>
           <Grid container justify="center">
-            <Button onClick={() => this.redirect('/country/results')}>
+            <Button disabled={this.state.inputValue === ''} onClick={() => this.redirect('/country/results')}>
                 <img src={magnifyingGlass} alt="Search" width="50" height="50"></img>
               </Button>
           </Grid>
