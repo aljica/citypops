@@ -1,5 +1,6 @@
 import { Typography, Grid, Input, Button, Container } from '@material-ui/core';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import magnifyingGlass from '../static/images/magnifying-glass.png';
 
 const CitySearch = (props) => {
   const [soughtCity, setSoughtCity] = useState('');
@@ -29,7 +30,7 @@ const CitySearch = (props) => {
           </Grid>
           <Grid container justify="center">
             <Button onClick={() => redirect('/city/results', soughtCity)}>
-                Search
+            <img src={magnifyingGlass} alt="Search" width="50" height="50"></img>
               </Button>
           </Grid>
         </Container>
