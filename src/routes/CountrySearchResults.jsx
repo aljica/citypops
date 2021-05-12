@@ -34,8 +34,12 @@ const CountrySearchResults = (props) => {
       .catch((e) => console.log(e));
   }
 
-  function redirect(path) {
-    props.history.push(path);
+  function redirect(path, cityName, population) {
+    props.history.push({
+      pathname: path,
+      name: cityName,
+      population: population,
+    });
   }
 
   useEffect(() => {
@@ -58,7 +62,7 @@ const CountrySearchResults = (props) => {
             results.map((city) => {
               return(
                 <Grid item xs={12} align="center">
-                <Button onClick={() => redirect('/city/results')} size="large" variant="contained">{city.toponymName}</Button>
+                <Button onClick={() => redirect('/city/results', city.toponymName, city.population)} size="large" variant="contained">{city.toponymName}</Button>
                 </Grid>
               )
             })}

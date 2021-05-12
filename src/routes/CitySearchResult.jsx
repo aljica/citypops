@@ -1,66 +1,29 @@
 import { useState, useEffect } from 'react';
-import { Grid, Button, Container, Typography } from '@material-ui/core';
+import { Grid, Button, Container, Typography, Box } from '@material-ui/core';
 
 const CitySearchResult = (props) => {
-  const [loading, setLoading] = useState(true);
-  const [results, setResults] = useState(null);
-
-  // Create URL.
-  const maxRows = 3;
-  const username = 'weknowit';
-  const soughtCity = props.location.search.replace('?', '');
-  // City (featureClass P) Search below:
-  const URL = 'http://api.geonames.org/searchJSON?name=' + soughtCity + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
-  const [url, setURL] = useState(URL);
-
-  function parseData(data) {
-    const cityData = data.geonames.map((city) => {
-      const objectData = {};
-      objectData['toponymName'] = city.toponymName;
-      objectData['population'] = city.population;
-      return objectData;
-    });
-    setResults(cityData);
-    console.log(cityData);
-    setLoading(false);
-  }
-
-  function getCities(URL) {
-    console.log(URL);
-    fetch(URL)
-      .then((response) => response.json())
-      .then((data) => parseData(data))
-      .catch((e) => console.log(e));
-  }
+  const [name, setName] = useState(null);
+  const [population, setPopulation] = useState(null);
 
   useEffect(() => {
-    getCities(url);
-  }, [url]);
+    if (props.location.name !== undefined) setName(props.location.name.toUpperCase());
+    setPopulation(props.location.population);
+  });
 
   return (
     <div>
       <Container maxwidth="sm">
         <Grid container spacing={1} justify="center">
-          <Typography variant="h6">
-            {soughtCountry.toUpperCase()}
+          <Typography variant="h5">
+            {name}
           </Typography>
-          <br></br>
-          <br></br>
-            {loading ? 
-            <Grid item xs={12} align="center">
-              <img alt='Loading' src={require('../static/images/magnifying-glass.png')}></img>
-            </Grid> :
-              results.map((city) => {
-                return(
-                  <Grid item xs={12} align="center">
-                  <Button size="large" variant="contained">{city.toponymName}</Button>
-                  </Grid>
-                )
-              })}
+          <Grid item xs={12} align="center">
+            <Box>{population}</Box>
+          </Grid>
         </Grid>
       </Container>
     </div>
   );
 }
 
-export default CountrySearchResults;
+export default CitySearchResult;
