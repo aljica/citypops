@@ -47,7 +47,10 @@ const CountrySearchResults = (props) => {
           </Typography>
           <br></br>
           <br></br>
-            {loading ? 'Loading' :
+            {loading ? 
+            <Grid item xs={12} align="center">
+              Loading
+            </Grid> :
               results.map((city) => {
                 return(
                   <Grid item xs={12} align="center">
