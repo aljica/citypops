@@ -49,7 +49,7 @@ const CountrySearchResults = (props) => {
           <br></br>
             {loading ? 
             <Grid item xs={12} align="center">
-              <img alt='Loading' src={require("../../public/loading.gif")}></img>
+              <img alt='Loading' src={require('../static/images/magnifying-glass.png')}></img>
             </Grid> :
               results.map((city) => {
                 return(
