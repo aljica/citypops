@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Grid, Button, Container, Typography } from '@material-ui/core';
+import loadingIcon from '../static/images/loading.gif';
 
 const CountrySearchResults = (props) => {
   const [loading, setLoading] = useState(true);
@@ -58,7 +59,7 @@ const CountrySearchResults = (props) => {
           <br></br>
             {loading ? 
             <Grid item xs={12} align="center">
-              <img alt='Loading' src={require('../static/images/magnifying-glass.png')}></img>
+              <img src={loadingIcon} alt="Loading" width="100" height="100"></img>
             </Grid> :
             results.map((city) => {
               return(
