@@ -3,14 +3,13 @@ import { Grid, Button, Container, Typography } from '@material-ui/core';
 
 const CountrySearchResults = (props) => {
   const [loading, setLoading] = useState(true);
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState([]);
+  const [cityNotFound, setCityNotFound] = useState(false);
 
   // Create URL.
   const maxRows = 3;
   const username = 'weknowit';
   const soughtCountry = props.location.search.replace('?', '');
-  // City (featureClass P) Search below:
-  // const URL = 'http://api.geonames.org/searchJSON?name=' + props.location.search.replace('?', '') + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
   const URL = 'http://api.geonames.org/searchJSON?q=' + soughtCountry + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
   const [url, setURL] = useState(URL);
 
@@ -21,12 +20,15 @@ const CountrySearchResults = (props) => {
       objectData['population'] = city.population;
       return objectData;
     });
-    setResults(cityData);
+    if (cityData.length === 0) {
+      setCityNotFound(true);
+    } else {
+      setResults(cityData);
+    }
     setLoading(false);
   }
 
   function getCities(URL) {
-    console.log(URL);
     fetch(URL)
       .then((response) => response.json())
       .then((data) => parseData(data))
@@ -65,6 +67,13 @@ const CountrySearchResults = (props) => {
                 </Grid>
               )
             })}
+            {cityNotFound ? <Grid item xs={12} align="center">
+              <Typography variant="h5">
+                Not Found
+              </Typography>
+            </Grid>
+            : 
+            console.log('Searching...')}
         </Grid>
       </Container>
     </div>
