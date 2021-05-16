@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Grid, Button, Container, Typography } from '@material-ui/core';
+import { Grid, Container, Typography } from '@material-ui/core';
 import Loading from '../components/Loading';
+import CityBoxResult from '../components/CityBoxResult';
 
 const CountrySearchResults = (props) => {
   const [loading, setLoading] = useState(true);
@@ -64,7 +65,7 @@ const CountrySearchResults = (props) => {
             results.map((city) => {
               return(
                 <Grid item xs={12} align="center">
-                <Button style={{width: '300px', height: '30px'}} onClick={() => redirect('/city/results', city.toponymName, city.population)} size="large" variant="contained">{city.toponymName}</Button>
+                  <CityBoxResult redirect={redirect} path='/city/results' cityName={city.toponymName} population={city.population} />
                 </Grid>
               )
             })}
