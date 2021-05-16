@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Grid, Container, Typography, Box } from '@material-ui/core';
-import loadingIcon from '../static/images/loading.gif';
+import Loading from '../components/Loading';
 
 const CitySearchResult = (props) => {
   const [name, setName] = useState(null);
@@ -61,7 +61,7 @@ const CitySearchResult = (props) => {
               <br></br>
               <br></br>
               {loading ? 
-              <img src={loadingIcon} alt="Loading" width="100" height="100"></img> :
+              <Loading /> :
               <Typography variant="h4">
                 {population}
               </Typography>
