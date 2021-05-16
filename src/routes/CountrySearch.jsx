@@ -2,6 +2,7 @@ import { Typography, Grid, Button, Input, Container } from '@material-ui/core';
 import { useState } from 'react';
 import magnifyingGlass from '../static/images/magnifying-glass.png';
 import UserInput from '../components/UserInput';
+import SearchButton from '../components/SearchButton';
 
 const CountrySearch = (props) => {
   const [inputValue, setInputValue] = useState('');
@@ -30,9 +31,7 @@ const CountrySearch = (props) => {
           <UserInput inputValue={inputValue} updateInputValue={updateInputValue} placeholder={"Enter a country"} />
         </Grid>
         <Grid container justify="center">
-          <Button disabled={inputValue === ''} onClick={() => redirect('/country/results')}>
-            <img src={magnifyingGlass} alt="Search" width="50" height="50"></img>
-          </Button>
+          <SearchButton inputValue={inputValue} redirect={redirect} path='/country/results' />
         </Grid>
       </Container>
     </div>
