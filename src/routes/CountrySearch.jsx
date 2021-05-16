@@ -27,7 +27,7 @@ const CountrySearch = (props) => {
         </Grid>
         <br></br>
         <Grid container justify="center">
-          <UserInput inputValue={inputValue} updateInputValue={updateInputValue} placeholder={"Enter a country"} />
+          <UserInput inputValue={inputValue} updateInputValue={updateInputValue} placeholder='Enter a country' />
         </Grid>
         <Grid container justify="center">
           <SearchButton inputValue={inputValue} redirect={redirect} path='/country/results' />
