@@ -1,4 +1,5 @@
 import { Grid, Button, Container } from '@material-ui/core';
+import SearchBy from '../components/SearchBy';
 
 const InitialSearchScreen = (props) => {
 
@@ -11,10 +12,10 @@ const InitialSearchScreen = (props) => {
       <Container maxWidth="sm">
         <Grid container spacing={1} justify="center">
           <Grid item xs={6} align="center">
-            <Button onClick={() => redirect('/city')} size="large" variant="contained">SEARCH BY CITY</Button>
+            <SearchBy redirect={redirect} path='/city' buttonText='SEARCH BY CITY' />
           </Grid>
           <Grid item xs={6} align="center">
-            <Button onClick={() => redirect('/country')} size="large" variant="contained">SEARCH BY COUNTRY</Button>
+            <SearchBy redirect={redirect} path='/country' buttonText='SEARCH BY COUNTRY' />
           </Grid>
         </Grid>
       </Container>
