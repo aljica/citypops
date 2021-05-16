@@ -19,6 +19,10 @@ const geonames = {
   createCountrySearchURL(maxRows, soughtCountry, username) {
     return 'http://api.geonames.org/searchJSON?q=' + soughtCountry + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
   },
+
+  createCitySearchURL(maxRows, cityToFind, username) {
+    return 'http://api.geonames.org/searchJSON?name=' + cityToFind + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
+  },
 }
 
 export default geonames;

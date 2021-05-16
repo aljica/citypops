@@ -1,31 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Grid, Container, Typography, Box } from '@material-ui/core';
 import Loading from '../components/Loading';
+import geonames from '../api/geonames';
 
 const CitySearchResult = (props) => {
   const [name, setName] = useState(null);
   const [population, setPopulation] = useState('Not Found');
   const [loading, setLoading] = useState(true);
 
-  function parseData(data) {
-    const cityData = data.geonames.map((city) => {
-      const objectData = {};
-      objectData['toponymName'] = city.toponymName;
-      objectData['population'] = city.population;
-      return objectData;
-    });
+  async function getData(URL) {
+    const cityData = await geonames.apiCall(URL);
     if (cityData.length !== 0) {
       setName(cityData[0].toponymName);
       setPopulation(cityData[0].population);
     }
     setLoading(false);
-  }
-
-  function getCityPopulation(URL) {
-    fetch(URL)
-      .then((response) => response.json())
-      .then((data) => parseData(data))
-      .catch((e) => console.log(e));
   }
 
   useEffect(() => {
@@ -37,10 +26,8 @@ const CitySearchResult = (props) => {
       setLoading(false);
     } else {
       const { cityToFind } = props.location;
-      const maxRows = 3;
-      const username = 'weknowit';
-      const URL = 'http://api.geonames.org/searchJSON?name=' + cityToFind + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
-      getCityPopulation(URL);
+      const URL = geonames.createCitySearchURL(3, cityToFind, 'weknowit');
+      getData(URL);
     }
   });
 
