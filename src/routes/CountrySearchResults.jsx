@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Grid, Button, Container, Typography } from '@material-ui/core';
-import loadingIcon from '../static/images/loading.gif';
+import { Grid, Container, Typography } from '@material-ui/core';
+import Loading from '../components/Loading';
+import CityBoxResult from '../components/CityBoxResult';
+import geonames from '../api/geonames';
 
 const CountrySearchResults = (props) => {
   const [loading, setLoading] = useState(true);
@@ -8,33 +10,9 @@ const CountrySearchResults = (props) => {
   const [cityNotFound, setCityNotFound] = useState(false);
 
   // Create URL.
-  const maxRows = 3;
-  const username = 'weknowit';
   const soughtCountry = props.location.search.replace('?', '');
-  const URL = 'http://api.geonames.org/searchJSON?q=' + soughtCountry + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
+  const URL = geonames.createCountrySearchURL(3, soughtCountry, 'weknowit');
   const [url, setURL] = useState(URL);
-
-  function parseData(data) {
-    const cityData = data.geonames.map((city) => {
-      const objectData = {};
-      objectData['toponymName'] = city.toponymName;
-      objectData['population'] = city.population;
-      return objectData;
-    });
-    if (cityData.length === 0) {
-      setCityNotFound(true);
-    } else {
-      setResults(cityData);
-    }
-    setLoading(false);
-  }
-
-  function getCities(URL) {
-    fetch(URL)
-      .then((response) => response.json())
-      .then((data) => parseData(data))
-      .catch((e) => console.log(e));
-  }
 
   function redirect(path, cityName, population) {
     props.history.push({
@@ -44,8 +22,15 @@ const CountrySearchResults = (props) => {
     });
   }
 
+  async function getData(URL) {
+    const cityData = await geonames.apiCall(URL);
+    if (cityData.length === 0) setCityNotFound(true);
+    else setResults(cityData);
+    setLoading(false);
+  }
+
   useEffect(() => {
-    getCities(url);
+    getData(url);
   }, [url]);
 
   return (
@@ -59,12 +44,12 @@ const CountrySearchResults = (props) => {
           <br></br>
             {loading ? 
             <Grid item xs={12} align="center">
-              <img src={loadingIcon} alt="Loading" width="100" height="100"></img>
+              <Loading />
             </Grid> :
             results.map((city) => {
               return(
                 <Grid item xs={12} align="center">
-                <Button style={{width: '300px', height: '30px'}} onClick={() => redirect('/city/results', city.toponymName, city.population)} size="large" variant="contained">{city.toponymName}</Button>
+                  <CityBoxResult redirect={redirect} path='/city/results' cityName={city.toponymName} population={city.population} />
                 </Grid>
               )
             })}

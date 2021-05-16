@@ -1,8 +1,8 @@
 import './App.css';
-import InitialSearchScreen from './routes/initialSearchView/InitialSearchScreen';
 import { Typography } from '@material-ui/core';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import CountrySearch from './routes/initialSearchView/CountrySearch';
+import InitialSearchScreen from './routes/InitialSearchScreen';
+import CountrySearch from './routes/CountrySearch';
 import CountrySearchResults from './routes/CountrySearchResults';
 import CitySearchResult from './routes/CitySearchResult';
 import CitySearch from './routes/CitySearch';
