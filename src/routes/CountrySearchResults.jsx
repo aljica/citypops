@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Grid, Container, Typography } from '@material-ui/core';
 import Loading from '../components/Loading';
 import CityBoxResult from '../components/CityBoxResult';
+import geonames from '../api/geonames';
 
 const CountrySearchResults = (props) => {
   const [loading, setLoading] = useState(true);
@@ -15,28 +16,6 @@ const CountrySearchResults = (props) => {
   const URL = 'http://api.geonames.org/searchJSON?q=' + soughtCountry + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
   const [url, setURL] = useState(URL);
 
-  function parseData(data) {
-    const cityData = data.geonames.map((city) => {
-      const objectData = {};
-      objectData['toponymName'] = city.toponymName;
-      objectData['population'] = city.population;
-      return objectData;
-    });
-    if (cityData.length === 0) {
-      setCityNotFound(true);
-    } else {
-      setResults(cityData);
-    }
-    setLoading(false);
-  }
-
-  function getCities(URL) {
-    fetch(URL)
-      .then((response) => response.json())
-      .then((data) => parseData(data))
-      .catch((e) => console.log(e));
-  }
-
   function redirect(path, cityName, population) {
     props.history.push({
       pathname: path,
@@ -45,8 +24,15 @@ const CountrySearchResults = (props) => {
     });
   }
 
+  async function getData(URL) {
+    const cityData = await geonames.apiCall(URL);
+    if (cityData.length === 0) setCityNotFound(true);
+    else setResults(cityData);
+    setLoading(false);
+  }
+
   useEffect(() => {
-    getCities(url);
+    getData(url);
   }, [url]);
 
   return (

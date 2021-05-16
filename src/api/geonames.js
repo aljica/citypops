@@ -1,5 +1,5 @@
-const geonames = () => {
-  function parseData(data) {
+const geonames = {
+  parseData(data) {
     const cityData = data.geonames.map((city) => {
       const objectData = {};
       objectData['toponymName'] = city.toponymName;
@@ -7,14 +7,14 @@ const geonames = () => {
       return objectData;
     });
     return cityData;
-  }
+  },
 
-function apiCall(URL) {
-  fetch(URL)
-    .then((response) => response.json())
-    .then((data) => parseData(data))
-    .catch((e) => console.log(e));
-  }
+  apiCall(URL) {
+    return fetch(URL)
+      .then((response) => response.json())
+      .then((data) => this.parseData(data))
+      .catch((e) => console.log(e));
+    }
 }
 
 export default geonames;
