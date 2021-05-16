@@ -1,4 +1,4 @@
-import { Grid, Button, Container } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
 import SearchBy from '../components/SearchBy';
 
 const InitialSearchScreen = (props) => {
