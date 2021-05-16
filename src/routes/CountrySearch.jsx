@@ -1,6 +1,6 @@
 import { Typography, Grid, Button, Input, Container } from '@material-ui/core';
 import { Component } from 'react';
-import magnifyingGlass from '../../static/images/magnifying-glass.png';
+import magnifyingGlass from '../static/images/magnifying-glass.png';
 
 class CountrySearch extends Component {
   constructor(props) {
