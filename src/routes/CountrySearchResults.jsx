@@ -10,10 +10,8 @@ const CountrySearchResults = (props) => {
   const [cityNotFound, setCityNotFound] = useState(false);
 
   // Create URL.
-  const maxRows = 3;
-  const username = 'weknowit';
   const soughtCountry = props.location.search.replace('?', '');
-  const URL = 'http://api.geonames.org/searchJSON?q=' + soughtCountry + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
+  const URL = geonames.createCountrySearchURL(3, soughtCountry, 'weknowit');
   const [url, setURL] = useState(URL);
 
   function redirect(path, cityName, population) {

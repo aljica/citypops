@@ -14,7 +14,11 @@ const geonames = {
       .then((response) => response.json())
       .then((data) => this.parseData(data))
       .catch((e) => console.log(e));
-    }
+  },
+
+  createCountrySearchURL(maxRows, soughtCountry, username) {
+    return 'http://api.geonames.org/searchJSON?q=' + soughtCountry + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
+  },
 }
 
 export default geonames;
