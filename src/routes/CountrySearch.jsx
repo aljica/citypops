@@ -1,6 +1,5 @@
-import { Typography, Grid, Button, Input, Container } from '@material-ui/core';
+import { Typography, Grid, Container } from '@material-ui/core';
 import { useState } from 'react';
-import magnifyingGlass from '../static/images/magnifying-glass.png';
 import UserInput from '../components/UserInput';
 import SearchButton from '../components/SearchButton';
 
