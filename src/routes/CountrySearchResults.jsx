@@ -10,7 +10,7 @@ const CountrySearchResults = (props) => {
   const [cityNotFound, setCityNotFound] = useState(false);
 
   // Create URL.
-  const soughtCountry = props.location.search.replace('?', '');
+  const soughtCountry = props.location.search.replace('?', '').replaceAll('%20', ' ');
   const URL = geonames.createCountrySearchURL(3, soughtCountry, 'weknowit');
   const [url, setURL] = useState(URL);
 
