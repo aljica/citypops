@@ -14,6 +14,9 @@ const CountrySearch = (props) => {
   }
 
   function updateInputValue(e) {
+    if (inputValue.length >= 20) {
+      if (!(e.target.value.length < inputValue.length)) return;
+    }
     setInputValue(e.target.value);
   }
 

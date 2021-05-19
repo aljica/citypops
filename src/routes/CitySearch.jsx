@@ -14,6 +14,9 @@ const CitySearch = (props) => {
   }
 
   function updateSoughtCity(e) {
+    if (soughtCity.length >= 20) {
+      if (!(e.target.value.length < soughtCity.length)) return;
+    }
     setSoughtCity(e.target.value);
   }
 
