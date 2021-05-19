@@ -7,7 +7,7 @@ import CountrySearchResults from './routes/CountrySearchResults';
 import CitySearchResult from './routes/CitySearchResult';
 import CitySearch from './routes/CitySearch';
 
-function App() {
+function App(props) {
   return (
     <Router>
       <div className="App">

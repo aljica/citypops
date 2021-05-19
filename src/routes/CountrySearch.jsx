@@ -26,7 +26,6 @@ const CountrySearch = (props) => {
       if (!(e.target.value.length < inputValue.length)) return;
     }
     setInputValue(e.target.value);
-    console.log(e.target.value);
   }
 
   function handleKeyboardClick(e) {
