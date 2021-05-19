@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Grid, Container, Typography } from '@material-ui/core';
 import Loading from '../components/Loading';
 import CityBoxResult from '../components/CityBoxResult';
@@ -23,7 +23,7 @@ const CountrySearchResults = (props) => {
     });
   }
 
-  async function getData(URL) {
+  const fetchData = useCallback(async () => {
     const lettersRegEx = /^$|^[a-zA-ZäöÅÄÖ\s]+$/;
     if (soughtCountry === '' || lettersRegEx.test(soughtCountry) === false) {
       setCityNotFound(true);
@@ -34,7 +34,7 @@ const CountrySearchResults = (props) => {
     if (cityData.length === 0) setCityNotFound(true);
     else setResults(cityData);
     setLoading(false);
-  }
+  }, [URL, soughtCountry]);
 
   useEffect(() => {
     if (cityNotFound) {
@@ -43,8 +43,8 @@ const CountrySearchResults = (props) => {
   });
 
   useEffect(() => {
-    getData(url);
-  }, [url]);
+    fetchData(url);
+  }, [url, fetchData]);
 
   return (
     <div>
