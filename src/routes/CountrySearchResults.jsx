@@ -12,6 +12,7 @@ const CountrySearchResults = (props) => {
   // Create URL.
   const soughtCountry = props.location.search.replace('?', '').replaceAll('%20', ' ');
   const URL = geonames.createCountrySearchURL(3, soughtCountry, 'weknowit');
+  // eslint-disable-next-line no-unused-vars
   const [url, setURL] = useState(URL);
 
   function redirect(path, cityName, population, notFound) {
