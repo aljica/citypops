@@ -23,12 +23,6 @@ const CountrySearchResults = (props) => {
     });
   }
 
-  useEffect(() => {
-    if (cityNotFound) {
-      redirect('/country', '', '', true);
-    }
-  });
-
   async function getData(URL) {
     const lettersRegEx = /^$|^[a-zA-ZäöÅÄÖ\s]+$/;
     if (soughtCountry === '' || lettersRegEx.test(soughtCountry) === false) {
@@ -41,6 +35,12 @@ const CountrySearchResults = (props) => {
     else setResults(cityData);
     setLoading(false);
   }
+
+  useEffect(() => {
+    if (cityNotFound) {
+      redirect('/country', '', '', true);
+    }
+  });
 
   useEffect(() => {
     getData(url);
