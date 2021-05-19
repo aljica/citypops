@@ -35,7 +35,7 @@ const CitySearchResult = (props) => {
       const URL = geonames.createCitySearchURL(3, cityToFind, 'weknowit');
       getData(URL);
     }
-  });
+  }, [name, population]);
 
   return (
     <div>
