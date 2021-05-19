@@ -18,6 +18,12 @@ const CitySearchResult = (props) => {
   }
 
   useEffect(() => {
+    if (!loading) {
+      if (population === 'Not Found') props.history.push('/city');
+    }
+  });
+
+  useEffect(() => {
     if (props.location.name !== undefined) {
       // If user sends in props, we can display the data straight away.
       // Otherwise, we have to fetch the data from our API.
