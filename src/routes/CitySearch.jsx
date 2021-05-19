@@ -17,7 +17,7 @@ const CitySearch = (props) => {
     // User may only input letters
     const lettersRegEx = /^$|^[a-zA-zåäöÅÄÖ\s]+$/;
     if (!(lettersRegEx.test(e.target.value))) return;
-    if (soughtCity.length > 20) {
+    if (soughtCity.length > 50) {
       if (!(e.target.value.length < soughtCity.length)) return;
     }
     setSoughtCity(e.target.value);

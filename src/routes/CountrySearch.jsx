@@ -17,7 +17,7 @@ const CountrySearch = (props) => {
     // User may only input letters
     const lettersRegEx = /^$|^[a-zA-ZäöÅÄÖ\s]+$/;
     if (!(lettersRegEx.test(e.target.value))) return;
-    if (inputValue.length >= 20) {
+    if (inputValue.length >= 50) {
       if (!(e.target.value.length < inputValue.length)) return;
     }
     setInputValue(e.target.value);
