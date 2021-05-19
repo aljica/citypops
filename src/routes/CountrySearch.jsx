@@ -24,6 +24,12 @@ const CountrySearch = (props) => {
     console.log(e.target.value);
   }
 
+  function handleKeyboardClick(e) {
+    if (e.key === 'Enter') {
+      if (inputValue.length > 0) redirect('/country/results', inputValue);
+    }
+  }
+
   return (
     <div>
       <Container maxWidth="sm">
@@ -34,7 +40,7 @@ const CountrySearch = (props) => {
         </Grid>
         <br></br>
         <Grid container justify="center">
-          <UserInput inputValue={inputValue} updateInputValue={updateInputValue} placeholder='Enter a country' />
+          <UserInput inputValue={inputValue} handleKeyboardClick={handleKeyboardClick} updateInputValue={updateInputValue} placeholder='Enter a country' />
         </Grid>
         <Grid container justify="center">
           <SearchButton inputValue={inputValue} redirect={redirect} path='/country/results' />
