@@ -23,6 +23,12 @@ const CountrySearchResults = (props) => {
   }
 
   async function getData(URL) {
+    const lettersRegEx = /^$|^[a-zA-ZäöÅÄÖ\s]+$/;
+    if (soughtCountry === '' || lettersRegEx.test(soughtCountry) === false) {
+      setCityNotFound(true);
+      setLoading(false);
+      return;
+    }
     const cityData = await geonames.apiCall(URL);
     if (cityData.length === 0) setCityNotFound(true);
     else setResults(cityData);
