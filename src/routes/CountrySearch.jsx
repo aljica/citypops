@@ -1,10 +1,11 @@
 import { Typography, Grid, Container } from '@material-ui/core';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import UserInput from '../components/UserInput';
 import SearchButton from '../components/SearchButton';
 
 const CountrySearch = (props) => {
   const [inputValue, setInputValue] = useState('');
+  const [notFound, setNotFound] = useState(false);
 
   function redirect(path) {
     props.history.push({
@@ -12,6 +13,10 @@ const CountrySearch = (props) => {
       search: inputValue,
     });
   }
+
+  useEffect(() => {
+    if (props.location.notFound) setNotFound(true);
+  }, [props.location.notFound])
 
   function updateInputValue(e) {
     // User may only input letters
@@ -44,6 +49,15 @@ const CountrySearch = (props) => {
         </Grid>
         <Grid container justify="center">
           <SearchButton inputValue={inputValue} redirect={redirect} path='/country/results' />
+        </Grid>
+        <Grid container justify="center">
+          {notFound ?
+          <Typography variant="h6">
+            Not Found
+          </Typography>
+          :
+          <span></span>
+          }
         </Grid>
       </Container>
     </div>

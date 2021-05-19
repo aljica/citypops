@@ -14,13 +14,20 @@ const CountrySearchResults = (props) => {
   const URL = geonames.createCountrySearchURL(3, soughtCountry, 'weknowit');
   const [url, setURL] = useState(URL);
 
-  function redirect(path, cityName, population) {
+  function redirect(path, cityName, population, notFound) {
     props.history.push({
       pathname: path,
       name: cityName,
       population: population,
+      notFound: notFound,
     });
   }
+
+  useEffect(() => {
+    if (cityNotFound) {
+      redirect('/country', '', '', true);
+    }
+  });
 
   async function getData(URL) {
     const lettersRegEx = /^$|^[a-zA-ZäöÅÄÖ\s]+$/;
@@ -65,7 +72,7 @@ const CountrySearchResults = (props) => {
               </Typography>
             </Grid>
             : 
-            console.log('Searching...')}
+            <span></span>}
         </Grid>
       </Container>
     </div>
