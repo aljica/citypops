@@ -4,6 +4,7 @@ const geonames = {
       const objectData = {};
       objectData['toponymName'] = city.toponymName;
       objectData['population'] = city.population;
+      objectData['id'] = Math.random();
       return objectData;
     });
     return cityData;
