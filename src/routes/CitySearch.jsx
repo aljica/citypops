@@ -1,11 +1,15 @@
 import { Typography, Grid, Input, Button, Container } from '@material-ui/core';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import UserInput from '../components/UserInput';
 import SearchButton from '../components/SearchButton';
 
 const CitySearch = (props) => {
   const [soughtCity, setSoughtCity] = useState('');
   const [notFound, setNotFound] = useState(false);
+
+  useEffect(() => {
+    if (props.location.notFound) setNotFound(true);
+  }, [props.location.notFound]);
 
   function redirect(path, soughtCity) {
     props.history.push({
@@ -44,6 +48,14 @@ const CitySearch = (props) => {
         </Grid>
         <Grid container justify="center">
           <SearchButton inputValue={soughtCity} redirect={redirect} path='/city/results' />
+        </Grid>
+        <Grid container justify="center">
+          {notFound ? 
+          <Typography variant="h6">
+            Not Found
+          </Typography> 
+          : 
+          <span></span>}
         </Grid>
       </Container>
     </div>

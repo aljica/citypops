@@ -17,9 +17,16 @@ const CitySearchResult = (props) => {
     setLoading(false);
   }
 
+  function redirect(path) {
+    props.history.push({
+      pathname: path,
+      notFound: true,
+    });
+  }
+
   useEffect(() => {
     if (!loading) {
-      if (population === 'Not Found') props.history.push('/city');
+      if (population === 'Not Found') redirect('/city');
     }
   });
 
