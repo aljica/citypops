@@ -63,7 +63,7 @@ const CountrySearchResults = (props) => {
             results.map((city) => {
               return(
                 <Grid key={city.toponymName} item xs={12} align="center">
-                  <CityBoxResult redirect={redirect} path='/city/results' cityName={city.toponymName} population={city.population} key={city.toponymName} />
+                  <CityBoxResult redirect={redirect} path='/city/results' cityName={city.toponymName} population={city.population} />
                 </Grid>
               )
             })}
