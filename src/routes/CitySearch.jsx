@@ -15,12 +15,18 @@ const CitySearch = (props) => {
 
   function updateSoughtCity(e) {
     // User may only input letters
-    const lettersRegEx = /^$|^[a-zA-Z\s]+$/;
+    const lettersRegEx = /^$|^[a-zA-z\s]+$/;
     if (!(lettersRegEx.test(e.target.value))) return;
     if (soughtCity.length > 20) {
       if (!(e.target.value.length < soughtCity.length)) return;
     }
     setSoughtCity(e.target.value);
+  }
+
+  function handleKeyboardClick(e) {
+    if (e.key === 'Enter') {
+      if (soughtCity.length > 0) redirect('/city/results', soughtCity);
+    }
   }
 
   return (
@@ -33,7 +39,7 @@ const CitySearch = (props) => {
           </Grid>
           <br></br>
           <Grid container justify="center">
-            <UserInput inputValue={soughtCity} updateInputValue={updateSoughtCity} placeholder='Enter a city' />
+            <UserInput inputValue={soughtCity} handleKeyboardClick={handleKeyboardClick} updateInputValue={updateSoughtCity} placeholder='Enter a city' />
           </Grid>
           <Grid container justify="center">
             <SearchButton inputValue={soughtCity} redirect={redirect} path='/city/results' />
