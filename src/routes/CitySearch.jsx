@@ -1,4 +1,4 @@
-import { Typography, Grid, Input, Button, Container } from '@material-ui/core';
+import { Typography, Grid, Container } from '@material-ui/core';
 import { useState, useEffect } from 'react';
 import UserInput from '../components/UserInput';
 import SearchButton from '../components/SearchButton';
