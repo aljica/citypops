@@ -8,12 +8,8 @@ const CountrySearchResults = (props) => {
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState([]);
   const [cityNotFound, setCityNotFound] = useState(false);
-
-  // Create URL.
-  const soughtCountry = props.location.search.replace('?', '').replaceAll('%20', ' ');
-  const URL = geonames.createCountrySearchURL(3, soughtCountry, 'weknowit');
   // eslint-disable-next-line no-unused-vars
-  const [url, setURL] = useState(URL);
+  const [soughtCountry, setSoughtCountry] = useState(props.location.search.replace('?', '').replaceAll('%20', ' '));
 
   function redirect(path, cityName, population, notFound) {
     props.history.push({
@@ -31,11 +27,11 @@ const CountrySearchResults = (props) => {
       setLoading(false);
       return;
     }
-    const cityData = await geonames.apiCall(URL);
+    const cityData = await geonames.conductSearchByCountry(soughtCountry);
     if (cityData.length === 0) setCityNotFound(true);
     else setResults(cityData);
     setLoading(false);
-  }, [URL, soughtCountry]);
+  }, [soughtCountry]);
 
   useEffect(() => {
     if (cityNotFound) {
@@ -44,8 +40,8 @@ const CountrySearchResults = (props) => {
   });
 
   useEffect(() => {
-    fetchData(url);
-  }, [url, fetchData]);
+    fetchData();
+  }, [fetchData]);
 
   return (
     <div>
