@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Grid, Container, Typography } from '@material-ui/core';
 import Loading from '../components/Loading';
 import CityBoxResult from '../components/CityBoxResult';
@@ -8,30 +8,40 @@ const CountrySearchResults = (props) => {
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState([]);
   const [cityNotFound, setCityNotFound] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [soughtCountry, setSoughtCountry] = useState(props.location.search.replace('?', '').replaceAll('%20', ' '));
 
-  // Create URL.
-  const soughtCountry = props.location.search.replace('?', '').replaceAll('%20', ' ');
-  const URL = geonames.createCountrySearchURL(3, soughtCountry, 'weknowit');
-  const [url, setURL] = useState(URL);
-
-  function redirect(path, cityName, population) {
+  function redirect(path, cityName, population, notFound) {
     props.history.push({
       pathname: path,
       name: cityName,
       population: population,
+      notFound: notFound,
     });
   }
 
-  async function getData(URL) {
-    const cityData = await geonames.apiCall(URL);
+  const fetchData = useCallback(async () => {
+    const lettersRegEx = /^$|^[a-zA-ZäöÅÄÖ\s]+$/;
+    if (soughtCountry === '' || lettersRegEx.test(soughtCountry) === false) {
+      setCityNotFound(true);
+      setLoading(false);
+      return;
+    }
+    const cityData = await geonames.conductSearchByCountry(soughtCountry);
     if (cityData.length === 0) setCityNotFound(true);
     else setResults(cityData);
     setLoading(false);
-  }
+  }, [soughtCountry]);
 
   useEffect(() => {
-    getData(url);
-  }, [url]);
+    if (cityNotFound) {
+      redirect('/country', '', '', true);
+    }
+  });
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   return (
     <div>
@@ -48,7 +58,7 @@ const CountrySearchResults = (props) => {
             </Grid> :
             results.map((city) => {
               return(
-                <Grid item xs={12} align="center">
+                <Grid key={city.toponymName} item xs={12} align="center">
                   <CityBoxResult redirect={redirect} path='/city/results' cityName={city.toponymName} population={city.population} />
                 </Grid>
               )
@@ -59,7 +69,7 @@ const CountrySearchResults = (props) => {
               </Typography>
             </Grid>
             : 
-            console.log('Searching...')}
+            <span></span>}
         </Grid>
       </Container>
     </div>

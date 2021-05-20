@@ -9,13 +9,26 @@ const CitySearchResult = (props) => {
   const [loading, setLoading] = useState(true);
 
   async function getData(URL) {
-    const cityData = await geonames.apiCall(URL);
+    const cityData = await geonames.apiCalls(URL);
     if (cityData.length !== 0) {
       setName(cityData[0].toponymName);
       setPopulation(cityData[0].population);
     }
     setLoading(false);
   }
+
+  function redirect(path) {
+    props.history.push({
+      pathname: path,
+      notFound: true,
+    });
+  }
+
+  useEffect(() => {
+    if (!loading) {
+      if (population === 'Not Found') redirect('/city');
+    }
+  });
 
   useEffect(() => {
     if (props.location.name !== undefined) {
@@ -29,7 +42,7 @@ const CitySearchResult = (props) => {
       const URL = geonames.createCitySearchURL(3, cityToFind, 'weknowit');
       getData(URL);
     }
-  });
+  }, [name, population, props.location]);
 
   return (
     <div>
