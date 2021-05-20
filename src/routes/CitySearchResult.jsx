@@ -9,7 +9,7 @@ const CitySearchResult = (props) => {
   const [loading, setLoading] = useState(true);
 
   async function getData(URL) {
-    const cityData = await geonames.apiCall(URL);
+    const cityData = await geonames.apiCalls(URL);
     if (cityData.length !== 0) {
       setName(cityData[0].toponymName);
       setPopulation(cityData[0].population);

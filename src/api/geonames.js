@@ -16,6 +16,13 @@ const geonames = {
       .catch((e) => console.log(e));
   },
 
+  apiCalls(URL) {
+    return fetch(URL)
+      .then((response) => response.json())
+      .then((data) => this.parseData(data))
+      .catch((e) => console.log(e));
+  },
+
   async conductSearchByCountry(soughtCountry) {
     // First, find the soughtCountry's country code.
     let url = `http://api.geonames.org/searchJSON?name_startsWith=${soughtCountry}&featureCode=PCLI&username=weknowit`;
@@ -35,7 +42,7 @@ const geonames = {
   },
 
   createCitySearchURL(maxRows, cityToFind, username) {
-    return 'http://api.geonames.org/searchJSON?name=' + cityToFind + `&featureClass=P&maxRows=${maxRows}&orderby=population&username=${username}`;
+    return 'http://api.geonames.org/searchJSON?q=' + cityToFind + `&featureCode=PPLC&maxRows=${maxRows}&username=${username}`;
   },
 }
 
