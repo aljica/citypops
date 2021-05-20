@@ -22,7 +22,7 @@ const CountrySearchResults = (props) => {
 
   const fetchData = useCallback(async () => {
     const lettersRegEx = /^$|^[a-zA-ZäöÅÄÖ\s]+$/;
-    if (soughtCountry === '' || lettersRegEx.test(soughtCountry) === false) {
+    if (soughtCountry === '' || lettersRegEx.test(soughtCountry) === false || soughtCountry.length > 100) {
       setCityNotFound(true);
       setLoading(false);
       return;
